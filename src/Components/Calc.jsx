@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { nanoid } from "nanoid";
+// import CalcItem from "./CalcItem";
+import s from "./Calc.module.css";
 
-const Calc = ({ toCount }) => {
+const Calc = ({ toCount, flag }) => {
   const [valueA, setValueA] = useState("");
   const [valueB, setValueB] = useState("");
   const [valueC, setValueC] = useState("");
@@ -10,8 +12,6 @@ const Calc = ({ toCount }) => {
   const inputIdA = useRef(nanoid());
   const inputIdB = useRef(nanoid());
   const inputIdC = useRef(nanoid());
-
-  // const countRes = useState((state) => state?.countResult);
 
   const handleChange = (e) => {
     const { name, value } = e.currentTarget;
@@ -47,50 +47,56 @@ const Calc = ({ toCount }) => {
     setValueC("");
   };
 
-  // useEffect(() => {
-  //   const values = {
-  //     valueA,
-  //     valueB,
-  //     valueC,
-  //   };
-  //   dispatch(toCount(values));
-  // }, [dispatch, countRes]);
-
   return (
     <>
       <h1>Enter values:</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          a =
+        {/* {arr.map((item) => (
+          <CalcItem item={item} handleChange={handleChange} />
+        ))} */}
+
+        <label htmlFor={inputIdA.current} className={s.label}>
+          {flag === "triangle" ? "a" : "radius"} =
           <input
             type="text"
             name="valueA"
             value={valueA}
             onChange={handleChange}
             id={inputIdA}
+            className={s.input}
           />
+          units
         </label>
-        <label htmlFor={inputIdB.current}>
-          b =
-          <input
-            type="text"
-            name="valueB"
-            value={valueB}
-            onChange={handleChange}
-            id={inputIdB}
-          />
-        </label>
-        <label htmlFor={inputIdC.current}>
-          c =
-          <input
-            type="text"
-            name="valueC"
-            value={valueC}
-            onChange={handleChange}
-            id={inputIdC}
-          />
-        </label>
-        <button type="submit" disabled={!valueA || !valueB || !valueC}>
+        {flag === "triangle" && (
+          <>
+            <label htmlFor={inputIdB.current} className={s.label}>
+              b =
+              <input
+                type="text"
+                name="valueB"
+                value={valueB}
+                onChange={handleChange}
+                id={inputIdB}
+                className={s.input}
+              />
+              units
+            </label>
+            <label htmlFor={inputIdC.current} className={s.label}>
+              c =
+              <input
+                type="text"
+                name="valueC"
+                value={valueC}
+                onChange={handleChange}
+                id={inputIdC}
+                className={s.input}
+              />
+              units
+            </label>
+          </>
+        )}
+
+        <button type="submit" className={s.btn}>
           Count
         </button>
       </form>
