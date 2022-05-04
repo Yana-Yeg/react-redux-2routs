@@ -1,19 +1,14 @@
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { getCircleDiameter, getTriangleSurface } from "./redux/countOperations";
+import { getCountResTria, getCountResCirc } from "./redux/countSelector";
+import Filter from "./Components/Filter";
 import Calc from "./Components/Calc";
 import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { getCircleDiameter, getTriangleSurface } from "./redux/countOperations";
-import {
-  getCountResTria,
-  getCountResCirc,
-  getIsLoading,
-} from "./redux/countSelector";
-import Filter from "./Components/Filter";
 
 export default function App() {
   const CountResultTria = useSelector(getCountResTria);
   const CountResultCirc = useSelector(getCountResCirc);
-  const loading = useSelector(getIsLoading);
   const [option, setOption] = useState("");
 
   const handleChangeOption = (e) => {
@@ -22,8 +17,6 @@ export default function App() {
 
   return (
     <div>
-      {loading && <h1 style={{ color: "green" }}>"Processing..."</h1>}
-
       <Filter option={option} handleChangeOption={handleChangeOption} />
       {option === "triangle" && (
         <>

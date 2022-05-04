@@ -1,15 +1,17 @@
 import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import triangle from "../images/trian.png";
 import circle from "../images/circle.png";
 import s from "./Calc.module.css";
+import { getIsLoading } from "../redux/countSelector";
 
 const Calc = ({ toCount, flag }) => {
   const [valueA, setValueA] = useState("");
   const [valueB, setValueB] = useState("");
   const [valueC, setValueC] = useState("");
   const dispatch = useDispatch();
+  const loading = useSelector(getIsLoading);
   const inputIdA = useRef(nanoid());
   const inputIdB = useRef(nanoid());
   const inputIdC = useRef(nanoid());
@@ -50,6 +52,9 @@ const Calc = ({ toCount, flag }) => {
 
   return (
     <>
+      {loading && (
+        <h1 style={{ color: "green", fontSize: "70px" }}>"Processing..."</h1>
+      )}
       <h1>Enter values:</h1>
       <div className={s.wrapper}>
         <form onSubmit={handleSubmit}>
