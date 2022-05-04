@@ -4,7 +4,8 @@ import { getTriangleSurface, getCircleDiameter } from "./countOperations";
 const countSlice = createSlice({
   name: "count",
   initialState: {
-    countResult: 0,
+    countResultTria: 0,
+    countResultCirc: 0,
     isLoading: false,
     error: null,
   },
@@ -16,7 +17,8 @@ const countSlice = createSlice({
     }),
     [getTriangleSurface.fulfilled]: (state, { payload }) => ({
       ...state,
-      countResult: payload,
+      countResultTria: payload,
+      countResultCirc: 0,
       isLoading: false,
     }),
     [getTriangleSurface.rejected]: (state, { payload }) => ({
@@ -31,7 +33,8 @@ const countSlice = createSlice({
     }),
     [getCircleDiameter.fulfilled]: (state, { payload }) => ({
       ...state,
-      countResult: payload,
+      countResultCirc: payload,
+      countResultTria: 0,
       isLoading: false,
     }),
     [getCircleDiameter.rejected]: (state, { payload }) => ({

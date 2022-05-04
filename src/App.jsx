@@ -3,21 +3,22 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCircleDiameter, getTriangleSurface } from "./redux/countOperations";
-import { getCountRes, getIsLoading } from "./redux/countSelector";
+import {
+  getCountResTria,
+  getCountResCirc,
+  getIsLoading,
+} from "./redux/countSelector";
 import Filter from "./Components/Filter";
 
 export default function App() {
-  const CountResult = useSelector(getCountRes);
+  const CountResultTria = useSelector(getCountResTria);
+  const CountResultCirc = useSelector(getCountResCirc);
   const loading = useSelector(getIsLoading);
   const [option, setOption] = useState("");
 
   const handleChangeOption = (e) => {
     setOption(e.target.value);
   };
-
-  // let s = setTimeout(() => {
-  //    return CountResult
-  // }, 2000);
 
   return (
     <div>
@@ -28,7 +29,7 @@ export default function App() {
         <>
           <Calc toCount={getTriangleSurface} flag={"triangle"} />
           <p>
-            area of ​​a triangle = <span>{CountResult}</span> units squared
+            area of ​​a triangle = <span>{CountResultTria}</span> units squared
           </p>
         </>
       )}
@@ -36,7 +37,7 @@ export default function App() {
         <>
           <Calc toCount={getCircleDiameter} flag={"circle"} />
           <p>
-            circle diameter = <span>{CountResult} </span>
+            circle diameter = <span>{CountResultCirc} </span>
             units
           </p>
         </>

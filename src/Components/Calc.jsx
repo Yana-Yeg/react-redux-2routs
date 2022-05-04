@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { nanoid } from "nanoid";
 import triangle from "../images/trian.png";
-import circle from "../images/circle.webp";
+import circle from "../images/circle.png";
 import s from "./Calc.module.css";
 
 const Calc = ({ toCount, flag }) => {
@@ -53,10 +53,6 @@ const Calc = ({ toCount, flag }) => {
       <h1>Enter values:</h1>
       <div className={s.wrapper}>
         <form onSubmit={handleSubmit}>
-          {/* {arr.map((item) => (
-          <CalcItem item={item} handleChange={handleChange} />
-        ))} */}
-
           <label htmlFor={inputIdA.current} className={s.label}>
             {flag === "triangle" ? "a" : "radius"} =
             <input

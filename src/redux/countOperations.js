@@ -16,7 +16,7 @@ export const getTriangleSurface = createAsyncThunk(
 );
 
 export const getCircleDiameter = createAsyncThunk(
-  "/count/getTriangleSurface",
+  "/count/getCircleDiameter",
   async (values, thunkApi) => {
     try {
       // const count = await fetchCircle(value);
